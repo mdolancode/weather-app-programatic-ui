@@ -13,10 +13,16 @@ class WeatherViewController: UIViewController {
     
     let rootStackView = UIStackView()
     
+    // search
     let searchStackView = UIStackView()
     let locationButton = UIButton()
     let searchButton = UIButton()
     let searchTextField = UITextField()
+    
+    // weather
+    let conditionImageView = UIImageView()
+    let temperatureLabel = UILabel()
+    let cityLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +67,19 @@ extension WeatherViewController {
         searchTextField.textAlignment = .right
         searchTextField.borderStyle = .roundedRect
         searchTextField.backgroundColor = .systemFill
+        
+        // weather
+        conditionImageView.translatesAutoresizingMaskIntoConstraints = false
+        conditionImageView.image = UIImage(systemName: "sun.max")
+        conditionImageView.tintColor = .label
+        
+        temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
+        temperatureLabel.font = UIFont.systemFont(ofSize: 80)
+        temperatureLabel.text = "16.0°C"
+        
+        cityLabel.translatesAutoresizingMaskIntoConstraints = false
+        cityLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        cityLabel.text = "Vancouver"
     }
     
     
@@ -68,13 +87,16 @@ extension WeatherViewController {
     func layout() {
         // backgroundView
         view.addSubview(backgroundView)
-        // root stackview
+        // root stackView
         view.addSubview(rootStackView)
 
-        // root stackview
+        // root stackView
         rootStackView.addArrangedSubview(searchStackView)
+        rootStackView.addArrangedSubview(conditionImageView)
+        rootStackView.addArrangedSubview(temperatureLabel)
+        rootStackView.addArrangedSubview(cityLabel)
         
-        // search stackview
+        // search stackView
         searchStackView.addArrangedSubview(locationButton)
         searchStackView.addArrangedSubview(searchTextField)
         searchStackView.addArrangedSubview(searchButton)
@@ -86,12 +108,12 @@ extension WeatherViewController {
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            // root stackview
+            // root stackView
             rootStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             rootStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: rootStackView.trailingAnchor, multiplier: 1),
             
-            // search stackview
+            // search stackView
             searchStackView.widthAnchor.constraint(equalTo: rootStackView.widthAnchor),
             
             // location button
@@ -100,9 +122,11 @@ extension WeatherViewController {
             // search button
             searchButton.widthAnchor.constraint(equalToConstant: 40),
             searchButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            // condition imageView
+            conditionImageView.heightAnchor.constraint(equalToConstant: 120),
+            conditionImageView.widthAnchor.constraint(equalToConstant: 120),
         ])
-        
     }
-    
 }
 
